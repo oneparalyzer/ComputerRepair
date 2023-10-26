@@ -1,0 +1,35 @@
+version: '3.4'
+
+networks:
+  bridge:
+    driver: bridge
+
+services:
+  computerrepair.api:
+    image: ${DOCKER_REGISTRY-}computerrepairapi
+    build:
+      context: .
+      dockerfile: ComputerRepair.Api/Dockerfile
+    depends_on:
+      - postgres
+    environment:
+      - ConnectionStrings__PostgreSQL=Server=postgres;Port=5432;Database=computer_repair;Username=postgres;Password=admin
+    networks: 
+      - bridge
+
+  postgres:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: computer_repair
+    ports:
+      - "5432:5432" 
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks: 
+      - bridge
+
+volumes:
+  postgres_data:
