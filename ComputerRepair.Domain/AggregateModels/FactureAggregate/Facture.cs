@@ -2,7 +2,6 @@
 using ComputerRepair.Domain.AggregateModels.FactureAggregate.Entities;
 using ComputerRepair.Domain.AggregateModels.FactureAggregate.ValueObjects;
 using ComputerRepair.Domain.AggregateModels.PartnerAggregate.ValueObjects;
-using ComputerRepair.Domain.AggregateModels.RoleAggregate.ValueObjects;
 using ComputerRepair.Domain.AggregateModels.SparePartAggregate.ValueObjects;
 using ComputerRepair.Domain.AggregateModels.Warehouses.ValueObjects;
 using ComputerRepair.Domain.Common.Errors;
@@ -30,8 +29,14 @@ public sealed class Facture : AggregateRoot<FactureId>
 
     public PartnerId PartnerId { get; private set; }
     public WarehouseId WarehouseId { get; private set; }
+    public FilePath? PathToWordFile { get; private set; }
 
     public IReadOnlyList<FacturePosition> Positions => _positions.AsReadOnly();
+
+    public void BindPathToWordFile(FilePath pathToWordFile)
+    {
+        PathToWordFile = pathToWordFile;
+    }
 
     public static Result<Facture> Create(
         List<FacturePosition> positions,

@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FluentValidation;
 
-namespace ComputerRepair.Application.CQRS.SpareParts.Commands.Create
+namespace ComputerRepair.Application.CQRS.SpareParts.Commands.Create;
+
+public sealed class CreateSparePartCommandValidator : AbstractValidator<CreateSparePartCommand>
 {
-    internal class CreateSparePartCommandValidator
+    public CreateSparePartCommandValidator()
     {
+        RuleFor(x => x.Title);
+        RuleFor(x => x.MeasureUnitId);
     }
 }

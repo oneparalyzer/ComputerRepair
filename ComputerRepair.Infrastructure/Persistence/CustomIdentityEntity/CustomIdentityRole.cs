@@ -9,5 +9,6 @@ public sealed class CustomIdentityRole : IdentityRole<Guid>
     {
         Id = Guid.NewGuid();
         Name = title;
+        NormalizedName = title;
     }
 }

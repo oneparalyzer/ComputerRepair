@@ -22,4 +22,8 @@
     <ProjectReference Include="..\ComputerRepair.Application\ComputerRepair.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Word\Новая папка\" />
+  </ItemGroup>
+
 </Project>

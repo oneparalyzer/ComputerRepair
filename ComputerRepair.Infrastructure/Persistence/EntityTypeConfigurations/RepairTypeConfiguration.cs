@@ -17,14 +17,12 @@ public sealed class RepairTypeConfiguration : IEntityTypeConfiguration<RepairTyp
                 id => id.Value,
                 value => RepairTypeId.Create(value));
 
-        builder.Property(x => x.OfficeId)
-            .HasConversion(
-                id => id.Value,
-                value => OfficeId.Create(value))
-            .IsRequired();
-
         builder.Property(x => x.Title)
             .HasMaxLength(50)
             .IsRequired();
+
+        builder.Ignore(x => x.DomainEvents);
+
+        builder.HasIndex(x => x.Title).IsUnique();
     }
 }

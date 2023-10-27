@@ -39,6 +39,7 @@ public static class DependencyInjection
         services.AddTransient<IOfficeRepository, OfficeRepository>();
         services.AddTransient<IRepairTypeRepository, RepairTypeRepository>();
         services.AddTransient<IUnitOfWork, UnitOfWork>();
+        services.AddTransient<IDataSeeder, DataSeeder>();
 
         return services;
     }

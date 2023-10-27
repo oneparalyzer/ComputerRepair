@@ -6,7 +6,7 @@ public sealed class CreateRepairTypeCommandValidator : AbstractValidator<CreateR
 {
     public CreateRepairTypeCommandValidator()
     {
-        RuleFor(x => x.OfficeId).NotEqual(Guid.Empty);
+        RuleFor(x => x.UserId).NotEqual(Guid.Empty);
         RuleFor(x => x.Title).MinimumLength(5).MaximumLength(50);
     }
 }

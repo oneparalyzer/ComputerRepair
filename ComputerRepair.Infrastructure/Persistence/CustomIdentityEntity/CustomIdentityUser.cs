@@ -10,5 +10,7 @@ public sealed class CustomIdentityUser : IdentityUser<Guid>
     {
         Email = email;
         UserName = userName;
+        NormalizedEmail = email;
+        NormalizedUserName = userName;
     }
 }

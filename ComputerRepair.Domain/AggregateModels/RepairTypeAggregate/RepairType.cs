@@ -6,18 +6,17 @@ namespace ComputerRepair.Domain.AggregateModels.RepairTypeAggregate;
 
 public sealed class RepairType : AggregateRoot<RepairTypeId>
 {
-    private RepairType(RepairTypeId id, string title, OfficeId officeId) : base(id)
+    private RepairType(RepairTypeId id, string title) : base(id)
     {
         Title = title;
-        OfficeId = officeId;
     }
 
     public string Title { get; private set; }
     public OfficeId OfficeId { get; }
 
-    public static RepairType Create(string title, OfficeId officeId)
+    public static RepairType Create(string title)
     {
-        return new RepairType(RepairTypeId.Create(), title, officeId);
+        return new RepairType(RepairTypeId.Create(), title);
     }
 
     public void Update(string newTitle)
