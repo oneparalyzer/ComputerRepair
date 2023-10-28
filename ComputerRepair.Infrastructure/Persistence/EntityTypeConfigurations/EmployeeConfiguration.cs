@@ -4,6 +4,7 @@ using ComputerRepair.Domain.AggregateModels.OfficeAggregate;
 using ComputerRepair.Domain.AggregateModels.OfficeAggregate.ValueObjects;
 using ComputerRepair.Domain.AggregateModels.UserAggregate;
 using ComputerRepair.Domain.AggregateModels.UserAggregate.ValueObjects;
+using ComputerRepair.Infrastructure.Persistence.CustomIdentityEntity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -49,7 +50,7 @@ public sealed class EmployeeConfiguration : IEntityTypeConfiguration<Employee>
 
         builder.HasOne<Office>().WithMany().HasForeignKey(x => x.OfficeId);
 
-        builder.HasOne<User>().WithMany().HasForeignKey(x => x.UserId);
+        //builder.HasOne<CustomIdentityUser>().WithMany().HasForeignKey(x => x.UserId);
 
         builder.Ignore(x => x.DomainEvents);
     }

@@ -26,5 +26,7 @@ public sealed class CreateSparePartCommandHandler : ICommandHandler<CreateSpareP
         {
 
         }
+
+        throw new NotImplementedException();
     }
 }

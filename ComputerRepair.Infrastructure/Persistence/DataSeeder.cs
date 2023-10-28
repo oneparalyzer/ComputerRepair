@@ -11,28 +11,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ComputerRepair.Infrastructure.Persistence;
 
-public class DataSeeder : IDataSeeder
+public static class DataSeeder
 {
-    private readonly UserManager<CustomIdentityUser> _userManager;
-
-    public DataSeeder(UserManager<CustomIdentityUser> userManager)
+    public static void Seed(ModelBuilder builder)
     {
-        _userManager = userManager;
-    }
-
-    public async Task SeedAsync(ModelBuilder builder)
-    {
-        var office = Office.Create(
-                "Офис-1",
-                Address.Create(
-                    "Архангельская область",
-                    "Северодвинск",
-                    "Ломоносова",
-                    "100"),
-                OfficeType.ForManagement);
-
-        var user = new CustomIdentityUser("admin@gmail.com", "oneparalyzer");
-
         builder.Entity<MeasureUnit>().HasData(new List<MeasureUnit>
         { 
             MeasureUnit.Piece
@@ -42,31 +24,6 @@ public class DataSeeder : IDataSeeder
         {
             OfficeType.ForProvideServices, 
             OfficeType.ForManagement
-        });
-
-        builder.Entity<Office>().HasData(new List<Office>
-        {
-            office
-        });
-
-        builder.Entity<CustomIdentityRole>().HasData(new List<CustomIdentityRole>
-        {
-            new CustomIdentityRole("boss")
-        });
-
-        await _userManager.CreateAsync(user, "Admin1337@");
-        await _userManager.AddToRoleAsync(user, "boss");
-
-        builder.Entity<Employee>().HasData(new List<Employee>
-        {
-            Employee.Create(
-                FullName.Create(
-                    "Пескишев",
-                    "Андрей",
-                    "Юрьевич"),
-                new DateTime(2003, 9, 26),
-                office.Id,
-                UserId.Create(user.Id))
         });
     }
 }

@@ -28,11 +28,8 @@ public sealed class CreateRepairTypeCommandHandler : ICommandHandler<CreateRepai
                     .ToList());
         }
 
-        //добавить проверку на существования офиса
-
         var sparePart = RepairType.Create(
-            command.Title, 
-            OfficeId.Create(command.OfficeId));
+            command.Title);
 
         await _unitOfWork.RepairTypeRepository.CreateAsync(sparePart, cancellationToken);
 

@@ -1,4 +1,5 @@
-﻿using ComputerRepair.Domain.AggregateModels.OfficeAggregate.Enums;
+﻿using ComputerRepair.Domain.AggregateModels.OfficeAggregate;
+using ComputerRepair.Domain.AggregateModels.OfficeAggregate.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -13,5 +14,7 @@ public sealed class OfficeTypeConfiguration : IEntityTypeConfiguration<OfficeTyp
         builder.Property(x => x.Name).HasMaxLength(24).IsRequired();
 
         builder.HasIndex(x => x.Name).IsUnique();
+
+        builder.HasMany<Office>().WithOne(x => x.OfficeType);
     }
 }

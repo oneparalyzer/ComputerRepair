@@ -27,7 +27,7 @@ public class OfficesController : ControllerBase
             request.Home));
         return Ok(result);
     }
-
+    
     [HttpGet]
     public async Task<IActionResult> GetAllAsync()
     {

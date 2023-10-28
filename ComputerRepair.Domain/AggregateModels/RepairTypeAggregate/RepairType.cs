@@ -12,7 +12,6 @@ public sealed class RepairType : AggregateRoot<RepairTypeId>
     }
 
     public string Title { get; private set; }
-    public OfficeId OfficeId { get; }
 
     public static RepairType Create(string title)
     {

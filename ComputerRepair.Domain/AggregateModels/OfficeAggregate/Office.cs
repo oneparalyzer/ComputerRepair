@@ -6,7 +6,7 @@ namespace ComputerRepair.Domain.AggregateModels.OfficeAggregate;
 
 public sealed class Office : AggregateRoot<OfficeId>
 {
-    public Office(OfficeId id) : base(id) { }
+    private Office(OfficeId id) : base(id) { }
 
     private Office(OfficeId id, string title, Address address, OfficeType officeType) : base(id)
     {

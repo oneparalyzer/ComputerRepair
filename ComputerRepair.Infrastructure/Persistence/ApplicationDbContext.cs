@@ -10,6 +10,7 @@ using ComputerRepair.Domain.AggregateModels.SparePartAggregate.Enums;
 using ComputerRepair.Domain.AggregateModels.WarehouseAggregate.Entities;
 using ComputerRepair.Domain.AggregateModels.Warehouses;
 using ComputerRepair.Infrastructure.Persistence.CustomIdentityEntity;
+using ComputerRepair.Infrastructure.Persistence.EntityTypeConfigurations;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
@@ -18,30 +19,25 @@ namespace ComputerRepair.Infrastructure.Persistence;
 
 public sealed class ApplicationDbContext : IdentityDbContext<CustomIdentityUser, CustomIdentityRole, Guid>
 {
-    private readonly IDataSeeder _dataSeeder;
-
     public ApplicationDbContext(
-        DbContextOptions<ApplicationDbContext> options, IDataSeeder dataSeeder) : base(options) 
-    {
-        _dataSeeder = dataSeeder;
-    }
+        DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
     public DbSet<Office> Offices { get; set; } //+
+    public DbSet<OfficeType> OfficeTypes { get; set; }//+
     public DbSet<RepairType> RepairTypes { get; set; }//+
     public DbSet<SparePart> SpareParts { get; set; }//+
     public DbSet<MeasureUnit> MeasureUnits { get; set; }//+
+    public DbSet<Partner> Partners { get; set; }//+
+    public DbSet<Employee> Employees { get; set; }//+
     //public DbSet<Facture> Factures { get; set; }
     //public DbSet<FacturePosition> FacturePositions { get; set; }
-    public DbSet<Partner> Partners { get; set; }//+
     //public DbSet<Warehouse> Warehouses { get; set; }
     //public DbSet<SparePartWarehouse> SparePartWarehouses { get; set; }
-    public DbSet<OfficeType> OfficeTypes { get; set; }//+
-    public DbSet<Employee> Employees { get; set; }//+
 
     protected override async void OnModelCreating(ModelBuilder builder)
     {
-        await _dataSeeder.SeedAsync(builder);
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         base.OnModelCreating(builder);
+        DataSeeder.Seed(builder);
     }
 }

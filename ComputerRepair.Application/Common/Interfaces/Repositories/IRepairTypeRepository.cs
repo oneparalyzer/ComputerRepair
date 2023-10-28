@@ -6,7 +6,9 @@ namespace ComputerRepair.Application.Common.Interfaces.Repositories;
 public interface IRepairTypeRepository
 {
     Task CreateAsync(RepairType repairType, CancellationToken cancellationToken = default);
+    Task<IEnumerable<RepairType>> GetAllAsync(CancellationToken cancellationToken = default);
     Task<RepairType?> GetByIdAsync(RepairTypeId repairTypeId, CancellationToken cancellationToken = default);
     Task<bool> IsExistByTitleAsync(string title, CancellationToken cancellationToken = default);
+    Task RemoveAsync(RepairType repairType, CancellationToken cancellationToken = default);
     Task UpdateAsync(RepairType sparePart, CancellationToken cancellationToken = default);
 }

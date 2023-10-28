@@ -3,6 +3,7 @@ using System;
 using ComputerRepair.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ComputerRepair.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231028134241_Add-Entities")]
+    partial class AddEntities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -122,12 +125,17 @@ namespace ComputerRepair.Infrastructure.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uuid");
 
+                    b.Property<Guid>("OfficeId")
+                        .HasColumnType("uuid");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("OfficeId");
 
                     b.HasIndex("Title")
                         .IsUnique();
@@ -466,6 +474,15 @@ namespace ComputerRepair.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("OfficeType");
+                });
+
+            modelBuilder.Entity("ComputerRepair.Domain.AggregateModels.RepairTypeAggregate.RepairType", b =>
+                {
+                    b.HasOne("ComputerRepair.Domain.AggregateModels.OfficeAggregate.Office", null)
+                        .WithMany()
+                        .HasForeignKey("OfficeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("ComputerRepair.Domain.AggregateModels.SparePartAggregate.SparePart", b =>

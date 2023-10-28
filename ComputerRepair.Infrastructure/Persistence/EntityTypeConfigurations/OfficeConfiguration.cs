@@ -42,14 +42,7 @@ public sealed class OfficeConfiguration : IEntityTypeConfiguration<Office>
             .IsRequired();
 
         builder.HasIndex(x => x.Title).IsUnique();
-
-        builder.HasMany<RepairType>()
-            .WithOne()
-            .HasForeignKey(x => x.OfficeId);
-
-
-        //Если ошибка добавить конкретный OfficeTypeId в Office
-        builder.HasOne(x => x.OfficeType).WithMany();
+        
 
         builder.Ignore(x => x.DomainEvents);
 

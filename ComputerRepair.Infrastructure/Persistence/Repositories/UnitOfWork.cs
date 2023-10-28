@@ -5,7 +5,7 @@ namespace ComputerRepair.Infrastructure.Persistence.Repositories;
 public sealed class UnitOfWork : IUnitOfWork
 {
     private readonly ApplicationDbContext _context;
-
+    
     public UnitOfWork(
         ApplicationDbContext context, 
         IRepairTypeRepository repairTypeRepository,

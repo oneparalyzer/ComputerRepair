@@ -28,16 +28,16 @@ public sealed class CreateOfficeCommandHandler : ICommandHandler<CreateOfficeCom
                 .ToList());
         }
 
-        var office = Office.Create(
-            command.Title,
-            Address.Create(
-                command.Region,
-                command.City,
-                command.Street,
-                command.Home));
+        //var office = Office.Create(
+        //    command.Title,
+        //    Address.Create(
+        //        command.Region,
+        //        command.City,
+        //        command.Street,
+        //        command.Home));
 
-        await _unitOfWork.OfficeRepository
-            .CreateAsync(office, cancellationToken);
+        //await _unitOfWork.OfficeRepository
+        //    .CreateAsync(office, cancellationToken);
 
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 
