@@ -1,6 +1,6 @@
 ﻿namespace ComputerRepair.Contracts.Offices.Responses;
 
-public class GetAllOfficesResponse
+public class GetOfficeByIdResponse
 {
     public Guid OfficeId { get; set; }
     public string Title { get; set; } = null!;

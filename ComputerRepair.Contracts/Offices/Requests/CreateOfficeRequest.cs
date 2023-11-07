@@ -5,4 +5,5 @@ public record CreateOfficeRequest(
     string Region,
     string City,
     string Street,
-    string Home);
+    string Home,
+    int OfficeTypeId);

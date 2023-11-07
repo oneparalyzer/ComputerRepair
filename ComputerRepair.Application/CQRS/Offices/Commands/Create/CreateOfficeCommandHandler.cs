@@ -4,6 +4,8 @@ using ComputerRepair.Domain.Common.OperationResults;
 using ComputerRepair.Domain.Common.Errors;
 using ComputerRepair.Domain.AggregateModels.OfficeAggregate;
 using ComputerRepair.Domain.AggregateModels.OfficeAggregate.ValueObjects;
+using ComputerRepair.Domain.AggregateModels.OfficeAggregate.Enums;
+using ComputerRepair.Domain.SeedWorks;
 
 namespace ComputerRepair.Application.CQRS.Offices.Commands.Create;
 
@@ -28,16 +30,27 @@ public sealed class CreateOfficeCommandHandler : ICommandHandler<CreateOfficeCom
                 .ToList());
         }
 
-        //var office = Office.Create(
-        //    command.Title,
-        //    Address.Create(
-        //        command.Region,
-        //        command.City,
-        //        command.Street,
-        //        command.Home));
+        OfficeType? officeType = Enumeration.GetAll<OfficeType>()
+            .FirstOrDefault(x =>
+                x.Id == command.OfficeTypeId);
+        if (officeType is null)
+        {
+            return Result.Failure(Errors.OfficeType
+                .NotFoundById(command.OfficeTypeId.ToString())
+                .ToList());
+        }
 
-        //await _unitOfWork.OfficeRepository
-        //    .CreateAsync(office, cancellationToken);
+        var office = Office.Create(
+            command.Title,
+            Address.Create(
+                command.Region,
+                command.City,
+                command.Street,
+                command.Home),
+            officeType);
+
+        await _unitOfWork.OfficeRepository
+            .CreateAsync(office, cancellationToken);
 
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 

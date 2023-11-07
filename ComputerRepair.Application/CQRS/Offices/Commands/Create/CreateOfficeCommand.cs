@@ -7,4 +7,5 @@ public record CreateOfficeCommand(
     string Region,
     string City,
     string Street,
-    string Home) : ICommand;
+    string Home,
+    int OfficeTypeId) : ICommand;
