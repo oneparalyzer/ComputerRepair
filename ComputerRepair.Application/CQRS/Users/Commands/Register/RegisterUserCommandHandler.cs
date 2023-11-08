@@ -1,5 +1,6 @@
 ﻿using ComputerRepair.Application.Common.Interfaces.Mediator;
 using ComputerRepair.Application.Common.Interfaces.Repositories;
+using ComputerRepair.Domain.AggregateModels.RoleAggregate.ValueObjects;
 using ComputerRepair.Domain.AggregateModels.UserAggregate;
 using ComputerRepair.Domain.AggregateModels.UserAggregate.ValueObjects;
 using ComputerRepair.Domain.Common.Errors;
@@ -25,7 +26,8 @@ public sealed class RegisterUserCommandHandler : ICommandHandler<RegisterUserCom
 
         if (userAlreadyExistByEmail)
         {
-            // добавить код
+            errors.Add(Errors.User
+                .AlreadyExistByEmail(command.Email));
         }
 
         bool userAlreadyExistByUserName = await _unitOfWork.UserRepository
@@ -33,14 +35,41 @@ public sealed class RegisterUserCommandHandler : ICommandHandler<RegisterUserCom
 
         if (userAlreadyExistByUserName)
         {
-            // добавить код
+            errors.Add(Errors.User
+                .AlreadyExistByUserName(command.UserName));
         }
 
-        //var user = User.Create(
-        //    EmailAddress.Create(command.Email),
-        //    command.UserName,
-        //    Password.Create(command.Password),
-        //    );
-        throw new AggregateException();
+        if (errors.Any())
+        {
+            return Result.Failure(errors);
+        }
+
+        bool roleIdAlreadyExist = await _unitOfWork.RoleRepository
+            .IsExistByIdAsync(RoleId.Create(command.RoleId), cancellationToken);
+
+        if (roleIdAlreadyExist)
+        {
+            return Result.Failure(Errors.Role
+                .NotFoundById(command.RoleId.ToString())
+                .ToList());
+        }
+
+        Result<User> createUserResult = User.Create(
+            EmailAddress.Create(command.Email),
+            command.UserName,
+            Password.Create(command.Password),
+            new List<RoleId> 
+            { 
+                RoleId.Create(command.RoleId)
+            });
+
+        if (!createUserResult.IsSuccess)
+        {
+            return createUserResult;
+        }
+
+        await _unitOfWork.UserRepository.CreateAsync(createUserResult.Value);
+        
+        return Result.Success(createUserResult);
     }
 }

@@ -9,11 +9,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComputerRepair.Application"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComputerRepair.Infrastructure", "ComputerRepair.Infrastructure\ComputerRepair.Infrastructure.csproj", "{8E01CACB-8270-44E0-A023-088E870A0DBD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComputerRepair.Contracts", "ComputerRepair.Contracts\ComputerRepair.Contracts.csproj", "{ACE7292F-92B1-4CF8-B3CC-EFDFA488D43A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComputerRepair.Contracts", "ComputerRepair.Contracts\ComputerRepair.Contracts.csproj", "{ACE7292F-92B1-4CF8-B3CC-EFDFA488D43A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComputerRepair.Api", "ComputerRepair.Api\ComputerRepair.Api.csproj", "{F2D0EB14-BB2D-4AA5-B5C0-4E7794792D6D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComputerRepair.Api", "ComputerRepair.Api\ComputerRepair.Api.csproj", "{F2D0EB14-BB2D-4AA5-B5C0-4E7794792D6D}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{180BE3C6-2AD8-4157-AC64-2944FAE41168}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComputerRepair.UnitTests", "..\ComputerRepair.UnitTests\ComputerRepair.UnitTests.csproj", "{290E003A-D500-4645-A4FC-01CE1D4D1000}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{180BE3C6-2AD8-4157-AC64-2944FAE41168}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{180BE3C6-2AD8-4157-AC64-2944FAE41168}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{180BE3C6-2AD8-4157-AC64-2944FAE41168}.Release|Any CPU.Build.0 = Release|Any CPU
+		{290E003A-D500-4645-A4FC-01CE1D4D1000}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{290E003A-D500-4645-A4FC-01CE1D4D1000}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{290E003A-D500-4645-A4FC-01CE1D4D1000}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{290E003A-D500-4645-A4FC-01CE1D4D1000}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -9,5 +9,11 @@ public partial class Errors
             message: "Роль не может повторяться.",
             field: "roleId",
             fieldValue: fieldValue);
+
+        public static Error NotFoundById(string fieldValue) => new Error(
+            code: "Role.NotFoundById",
+            message: "Роль не найдена.",
+            field: "roleId",
+            fieldValue: fieldValue);
     }
 }

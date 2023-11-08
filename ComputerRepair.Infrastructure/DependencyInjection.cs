@@ -40,6 +40,7 @@ public static class DependencyInjection
         services.AddTransient<IRepairTypeRepository, RepairTypeRepository>();
         services.AddTransient<IUserRepository, UserRepository>();
         services.AddTransient<ISparePartRepository, SparePartRepository>();
+        services.AddTransient<IRoleRepository, RoleRepository>();
         services.AddTransient<IUnitOfWork, UnitOfWork>();
 
         return services;

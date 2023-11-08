@@ -21,8 +21,18 @@ public sealed class UserRepository : IUserRepository
 
     public async Task CreateAsync(User user)
     {
-        CustomIdentityUser identityUser = ConvertToIdentityUser(user);
+        var roleTitles = new List<string>();    
+
+        CustomIdentityUser identityUser = Adapt(user);
         await _userManager.CreateAsync(identityUser, user.Password.Value);
+
+        foreach (var roleId in user.RoleIds)
+        {
+            CustomIdentityRole? role = await _roleManager.FindByIdAsync(roleId.ToString());
+            roleTitles.Add(role.Name);
+        }
+
+        await _userManager.AddToRolesAsync(identityUser, roleTitles);
     }
 
     public async Task<User?> GetByUserNameAsync(string userName)
@@ -33,7 +43,7 @@ public sealed class UserRepository : IUserRepository
             return null;
         }
 
-        User user = ConvertToUser(identityUser);
+        User user = Adapt(identityUser);
         return user;
     }
 
@@ -45,7 +55,7 @@ public sealed class UserRepository : IUserRepository
             return null;
         }
 
-        User user = ConvertToUser(identityUser);
+        User user = Adapt(identityUser);
         return user;
     }
 
@@ -73,11 +83,11 @@ public sealed class UserRepository : IUserRepository
             return null;
         }
 
-        User user = ConvertToUser(identityUser);
+        User user = Adapt(identityUser);
         return user;
     }
 
-    private User ConvertToUser(CustomIdentityUser identityUser)
+    private User Adapt(CustomIdentityUser identityUser)
     {
         //return User.Create(
         //    EmailAddress.Create(identityUser.Email),
@@ -86,7 +96,7 @@ public sealed class UserRepository : IUserRepository
         throw new NotImplementedException();
     }
 
-    private CustomIdentityUser ConvertToIdentityUser(User user)
+    private CustomIdentityUser Adapt(User user)
     {
         return new CustomIdentityUser(
             user.UserName,
