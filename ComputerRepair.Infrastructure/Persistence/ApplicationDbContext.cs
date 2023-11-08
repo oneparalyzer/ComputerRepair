@@ -25,10 +25,10 @@ public sealed class ApplicationDbContext : IdentityDbContext<CustomIdentityUser,
     public DbSet<Office> Offices { get; set; } //+
     public DbSet<OfficeType> OfficeTypes { get; set; }//+
     public DbSet<RepairType> RepairTypes { get; set; }//+
-    public DbSet<SparePart> SpareParts { get; set; }//+
+    public DbSet<SparePart> SpareParts { get; set; }//
     public DbSet<MeasureUnit> MeasureUnits { get; set; }//+
-    public DbSet<Partner> Partners { get; set; }//+
-    public DbSet<Employee> Employees { get; set; }//+
+    public DbSet<Partner> Partners { get; set; }//
+    public DbSet<Employee> Employees { get; set; }//
     //public DbSet<Facture> Factures { get; set; }
     //public DbSet<FacturePosition> FacturePositions { get; set; }
     //public DbSet<Warehouse> Warehouses { get; set; }

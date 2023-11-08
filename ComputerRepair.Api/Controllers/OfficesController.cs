@@ -13,7 +13,7 @@ namespace ComputerRepair.Api.Controllers;
 
 [Route("api/offices")]
 [ApiController]
-public class OfficesController : ControllerBase
+public sealed class OfficesController : ControllerBase
 {
     private readonly ISender _sender;
 

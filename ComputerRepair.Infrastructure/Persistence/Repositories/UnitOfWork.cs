@@ -22,6 +22,8 @@ public sealed class UnitOfWork : IUnitOfWork
     public IOfficeRepository OfficeRepository { get; }
     public IRepairTypeRepository RepairTypeRepository { get; }
 
+    public ISparePartRepository SparePartRepository => throw new NotImplementedException();
+
     public async Task SaveChangesAsync(CancellationToken cancellationToken)
     {
         await _context.SaveChangesAsync(cancellationToken);

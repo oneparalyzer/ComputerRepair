@@ -6,7 +6,6 @@ public sealed class CreateSparePartCommandValidator : AbstractValidator<CreateSp
 {
     public CreateSparePartCommandValidator()
     {
-        RuleFor(x => x.Title);
-        RuleFor(x => x.MeasureUnitId);
+        RuleFor(x => x.Title).MinimumLength(5).MaximumLength(50);
     }
 }

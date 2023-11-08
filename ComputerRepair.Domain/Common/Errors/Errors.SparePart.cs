@@ -11,8 +11,8 @@ public partial class Errors
             fieldValue: fieldValue);
 
         public static Error NotFoundById(string fieldValue) => new Error(
-            code: "Warehouse.NotFoundById",
-            message: "Склад не найден.",
+            code: "SparePart.NotFoundById",
+            message: "Зап-часть не найдена.",
             field: "warehouseId",
             fieldValue: fieldValue);
 

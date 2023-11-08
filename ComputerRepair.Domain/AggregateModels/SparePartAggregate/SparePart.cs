@@ -14,11 +14,17 @@ public sealed class SparePart : AggregateRoot<SparePartId>
         MeasureUnit = measureUnit;
     }
 
-    public string Title { get; }
-    public MeasureUnit MeasureUnit { get; }
+    public string Title { get; private set; }
+    public MeasureUnit MeasureUnit { get; private set; }
 
     public static SparePart Create(string title, MeasureUnit measureUnit)
     {
         return new SparePart(SparePartId.Create(), title, measureUnit);
+    }
+
+    public void Update(string newTitle, MeasureUnit newMeasureUnit)
+    {
+        Title = newTitle;
+        MeasureUnit = newMeasureUnit;
     }
 }
